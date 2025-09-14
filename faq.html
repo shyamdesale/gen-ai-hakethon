@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FAQ & Resources - AgriMentor AI</title>
+  <meta name="description" content="Frequently Asked Questions and Resources for AgriMentor AI users." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-gradient-to-b from-green-100 to-green-50 font-sans text-gray-800 min-h-screen flex flex-col">
+  <header class="bg-green-700 text-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-3xl font-extrabold tracking-wide">AgriMentor AI</h1>
+      <nav class="space-x-6 text-lg font-semibold">
+        <a href="index.html" class="hover:text-green-300 transition">Home</a>
+        <a href="about.html" class="hover:text-green-300 transition">About</a>
+        <a href="ask.html" class="hover:text-green-300 transition">Ask Mentor</a>
+        <a href="faq.html" class="hover:text-green-300 transition font-bold underline">FAQ/Resources</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container mx-auto flex-grow p-6 max-w-4xl">
+    <h2 class="text-4xl font-bold mb-6">Frequently Asked Questions</h2>
+    <section class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">What is AgriMentor AI?</h3>
+      <p>AgriMentor AI is an AI-powered platform that provides personalized crop advice, career guidance, and market insights to farmers.</p>
+    </section>
+    <section class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">How does the AI generate advice?</h3>
+      <p>Currently, the advice is generated using a mock AI model. Future versions will integrate Google Cloud's Vertex AI for real-time, personalized recommendations.</p>
+    </section>
+    <section class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Is my data stored securely?</h3>
+      <p>Yes, all user queries and data are stored securely in Firebase Firestore with proper authentication and access controls.</p>
+    </section>
+
+    <h2 class="text-4xl font-bold mb-6">Resources</h2>
+    <div id="resources" class="space-y-3 text-lg">
+      <!-- Resources will be loaded here by script.js -->
+    </div>
+  </main>
+
+  <footer class="bg-green-700 text-white text-center p-4 mt-auto">
+    <p>© 2025 AgriMentor AI. Powered by Google Cloud & Firebase.</p>
+  </footer>
+</body>
+</html>
