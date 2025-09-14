@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebPage1</title>
+    <link rel="stylesheet" href="WebPage1.css">
+</head>
+<body>
+
+    <div id="mainbg"></div>
+
+    <header>
+        <div class="navbarfro">
+            <img src="weblogo.png" alt="Logo">
+            <ul class="nave-menu">
+                <li><a href="#featuresp2" class="features">Features</a></li>
+                <li><a href="#livedemop3" class="livedemo">Live Demo</a></li>
+                <li><a href="#about" class="aboutsec">About</a></li>
+                <li><a href="#whychatbhai" class="whythischatbot">Why Edu Guide AI?</a></li>
+            </ul>
+            <button onclick="window.location.href='index .html';">Get Started</button>
+        </div>
+    </header>
+
+    <main>
+        <section id="page1">
+            <a><img src="weblogo.png" class="logoweb"></a>
+            <h2 class="maintagline">Your Personal Study Guide Generator</h2>
+            <h2 class="subtagline">Your AI study buddy - here to create notes, study plans & quizzes, anytime you need.”</h2>
+            <p class="discription">
+                “Meet your AI Study Buddy 📘 — always ready to create personalised notes, smart study plans, and practice quizzes. Just enter your subjects or topics, and it will generate clear summaries, important points, and even daily schedules for revision. Smarter learning, faster preparation, and exam success made simple!”S
+            </p>
+            <div class="expbut">
+                <button class="beingyourjourney" onclick="window.location.href='index .html';">Being Your Journey</button>
+                <a href="#featuresp2"><button class="exploarfeatures">Explore Features</button></a>
+            </div>
+        </section>
+
+        <section id="featuresp2" class="features-section">
+            <div class="features-header">
+                <h2>A New Dimension of <span>AI Capability</span></h2>
+                <p>
+                    CodeRush isn't just an upgrade; it's a new architecture for thought. We focused on three core pillars: reasoning, speed, and reliability.
+                </p>
+            </div>
+
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="icon">🚀</div>
+                    <h3>Advanced Cognitive Reasoning</h3>
+                    <p>Understands complex, multi-step instructions and nuanced human context. Go beyond simple Q&amp;A to true problem-solving partnership.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">🎨</div>
+                    <h3>Hyper-Modal Understanding</h3>
+                    <p>Seamlessly analyzes, interprets, and generates content across text, code, images, and structured data streams.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="icon">💻</div>
+                    <h3>Blazing-Fast API</h3>
+                    <p>A beautifully documented, low-latency API that allows powerful integration into your stack in minutes, not weeks.</p>
+                </div>
+            </div>
+        </section>
+        <section id="livedemop3" class="page3">
+            <div class="container">
+                <h2 class="p3h1">Elegance in Action</h2>
+                <p class="subtitle">
+                Interact with a sandboxed instance of CodeRush below. 
+                This is a pre-recorded demonstration of its capabilities.
+                </p>
+
+                <div class="code-box">
+                <pre><code>
+            You &gt; Write a python function to get the current price of Bitcoin using an API.
+
+            CodeRush &gt; Certainly. Here is a simple Python function using 'requests' and the CoinGecko API:
+
+            ```python
+            import requests
+
+            def get_bitcoin_price():
+                try:
+                    response = requests.get('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&amp;vs_currencies=usd')
+                    response.raise_for_status()
+                    data = response.json()
+                    price = data['bitcoin']['usd']
+                    print(f"The current price of Bitcoin is: ${price:,}")
+                except requests.exceptions.RequestException as e:
+                    print("Error fetching data:", e)
+        print(f"Error: {e}")
+        get_bitcoin_price()
+        ```
+        </section>
+        <section class="about" id="about">
+            <div class="about-container">
+                <h2 class="about-title">Behind the innovation</h2>
+                <p class="about-subtitle">“Where teamwork meets innovation to create smart solutions”</p>
+
+                <div class="team-grid">
+                <article class="member-card">
+                    <div class="avatar">
+                    <img src="shyamrd.jpg" alt="Member 1" />
+                    </div>
+                    <h3 class="name">Shyam Raosaheb Desale</h3>
+                    <p class="role">Member</p>
+                    <p class="bio">👨‍💻 Enthusiastic Web Developer / Programmer.</p>
+                    <ul class="skills">
+                    <li>HTML</li><li>CSS</li><li>JavaScript</li>
+                    </ul>
+                </article>
+
+                <article class="member-card">
+                    <div class="avatar">
+                    <img src="atharvak.jpg" alt="Member 2" />
+                    </div>
+                    <h3 class="name">Atharv Ashok Kunde</h3>
+                    <p class="role">Leader</p>
+                    <p class="bio">💡 Passion for Building Creative Tech Solutions.</p>
+                    <ul class="skills">
+                    <li>HTML</li><li>css</li><li>GitHub</li>
+                    </ul>
+                </article>
+
+                <article class="member-card">
+                    <div class="avatar">
+                    <img src="vinitbaby.jpg" alt="Member 3" />
+                    </div>
+                    <h3 class="name">Vinit Vilas Bhamare</h3>
+                    <p class="role">Member</p>
+                    <p class="bio">🌱 Always Learning New Tech & <br>Skills.</p>
+                    <ul class="skills">
+                    <li>HTML</li><li>JavaScript</li><li>GitHub</li>
+                    </ul>
+                </article>
+                </div>
+            </div>
+        </section>
+        <section id="whychatbhai" class="whychatbot">
+            <h2>Why Choose <span>This Edu guide AI ?</span></h2>
+            <p>Fast replies ⚡, Fast replies ⚡, 24×7 availability 🌙, personalised notes 📘, smart study plans 🗓️, quizzes 📝, and progress tracking 📊 — everything you need for smarter learning in one place.
+            <div class="btns">
+            <button class="btn btn-primary">See Benefits</button>
+            <button class="btn btn-secondary">View Use-Cases</button>
+            </div>
+
+            <h2 class="benefits-title">Top Benefits 💡</h2>
+            <p class="benefits-sub">Which kind of things to make it different — instant ans, accuracy, generate study matareal, quizzes.</p>
+
+            <div class="cards">
+            <div class="card">
+                <div class="icon">⚡</div>
+                <h3>Instant Answers</h3>
+                <p>Milliseconds mein response, so user wait nahi karta. Better retention & experience.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🧠</div>
+                <h3>Smart & Helpful</h3>
+                <p>Context samajhkar relevant reply deta hai — docs, FAQs, aur examples se trained.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🌙</div>
+                <h3>24×7 Online</h3>
+                <p>Har time available. Late-night queries? No problem.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🎯</div>
+                <h3>Leads that Convert</h3>
+                <p>Smart prompts + forms se users ko guide karke qualified leads collect karta hai.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">🔒</div>
+                <h3>Secure by Design</h3>
+                <p>Data encryption + access control. PII safe rahe — compliance friendly.</p>
+            </div>
+
+            <div class="card">
+                <div class="icon">⚙️</div>
+                <h3>Embed Anywhere</h3>
+                <p>1-line script ya widget. Web, mobile, WhatsApp — sab jagah chalega.</p>
+            </div>
+            </div>
+        </section>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Account</title>
+  <link rel="stylesheet" href="createaccount.css"/>
+</head>
+<body>
+  <div id="mainlogbg"></div>
+
+  <div>
+    <form class="form" id="signupForm">
+      <img class="logobaba" src="weblogo.png" alt="Logo"/>
+      <p>Create your account and join the chat magic ✨</p>
+
+      <div class="form-content">
+
+        <label>
+          <input type="text" name="name" id="name" required autocomplete="name"/>
+          <span>Full Name</span>
+        </label>
+
+        <label>
+          <input type="email" name="email" id="email" required autocomplete="email"/>
+          <span>Email Address</span>
+        </label>
+
+        <label>
+          <input type="tel" name="mobile" id="mobile" required pattern="[0-9]{10}" maxlength="10" autocomplete="tel"/>
+          <span>Mobile Number</span>
+        </label>
+
+        <label>
+          <input type="password" name="password" id="password" required minlength="6" autocomplete="new-password"/>
+          <span>Password</span>
+        </label>
+
+        <button type="submit">
+          <a class="buttontext" href="mainpage.html#homePage">Create Account</a>
+        </button>
+
+        <p class="dontacc">
+          Already have an account?
+          <a class="createacc" onclick="window.location.href='index .html';">Sign In</a>
+        </p>
+      </div>
+
+      <p class="copytxt">
+        © 2025 Xai & LVS Private Limited Corp. All rights reserved.<br>
+        Where elegance meets intelligence. This is the CodeRush.
+      </p>
+    </form>
+  </div>
+</body>
+</html>

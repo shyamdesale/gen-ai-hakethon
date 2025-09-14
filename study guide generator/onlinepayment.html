@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Get Premium – Demo + UPI</title>
+<style>
+  :root{
+    --bg:#0b1220; --card:#111a2b; --text:#e8eefc; --muted:#98a2b3; --brand:#7c3aed; --brand-2:#22d3ee; --ok:#22c55e; --warn:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;     font-family: "Poppins", sans-serif;,system-ui,Segoe UI,Roboto,Arial; background:radial-gradient(1200px 600px at 80% -10%, #1b2440 0%, #0b1220 60%) no-repeat, var(--bg);
+    color:var(--text);
+  }
+  .wrap{min-height:100svh; display:grid; place-items:center; padding:24px}
+  .card{
+    width:100%; max-width:720px; background:linear-gradient(180deg,#131c30 0%, #0d1526 100%); border:1px solid #223055; border-radius:24px; padding:28px; box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  .title{font-size:28px; font-weight:800; letter-spacing:.2px; margin:0 0 8px}
+  .sub{color:var(--muted); margin:0 0 20px}
+  .badges{display:flex; gap:10px; flex-wrap:wrap; margin:12px 0 22px}
+  .badge{padding:6px 10px; border-radius:999px; font-size:12px; border:1px solid #2a3b66; background:#0f1730}
+  .grid{display:grid; gap:18px; grid-template-columns:1fr; }
+  .cta{
+    display:inline-flex; align-items:center; gap:10px; padding:14px 20px; border-radius:14px; font-weight:700; font-size:16px;
+    background:linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%); color:white; border:none; cursor:pointer; box-shadow:0 10px 30px rgba(124,58,237,.35);
+  }
+  .cta:active{transform:translateY(1px)}
+  .hint{font-size:13px; color:var(--muted)}
+  .row{display:flex; gap:12px; flex-wrap:wrap}
+  .btn{
+    background:#1a2442; color:#e8eefc; border:1px solid #2a3b66; padding:12px 14px; border-radius:12px; font-weight:600; cursor:pointer;
+  }
+  .btn:hover{background:#1e2a50}
+  .btn.ok{background:#122a1a; border-color:#1f7a3e; color:#b9f6c4}
+  .btn.warn{background:#2a2212; border-color:#7a5a1f; color:#ffe1b0}
+  .box{
+    display:grid; gap:12px; background:#0f1730; border:1px dashed #2a3b66; border-radius:16px; padding:16px
+  }
+  .k{font-size:12px; color:#9fb3d9}
+  input[type=text],input[type=number]{width:100%; padding:10px 12px; background:#0b1220; border:1px solid #2a3b66; border-radius:10px; color:#e8eefc}
+  .pill{padding:8px 12px; border-radius:999px; background:#0d162d; border:1px solid #2a3b66; font-size:12px}
+  .payarea{display:grid; gap:12px}
+  .qr{display:grid; place-items:center; gap:10px}
+  .qr img{width:220px; height:220px; border-radius:12px; border:1px solid #223055; background:#0b1220}
+  .muted{color:#9fb3d9; font-size:13px}
+  .sep{height:1px; background:#223055; opacity:.5; margin:8px 0}
+  .toast{position:fixed; inset:auto 0 22px 0; display:grid; place-items:center; pointer-events:none}
+  .toast span{pointer-events:auto; background:#0d162d; border:1px solid #2a3b66; padding:10px 14px; border-radius:12px}
+  .success{
+    position:fixed; inset:0; display:none; place-items:center; background:rgba(3,6,15,.6); backdrop-filter:blur(6px);
+  }
+  .success .panel{
+    background:#0f1730; border:1px solid #2a3b66; border-radius:20px; padding:24px; width:min(520px,92vw); text-align:center;
+  }
+  .tick{font-size:52px; line-height:1}
+  .fade{animation:fade .35s ease}
+  @keyframes fade{from{opacity:0; transform:translateY(6px)} to{opacity:1; transform:translateY(0)}}
+  .disclaimer{font-size:12px; color:#9fb3d9}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card fade">
+      <h1 class="title">Get Premium 🔥</h1>
+      <p class="sub">One click access • Secure UPI • Desktop QR support</p>
+
+      <div class="badges">
+        <span class="badge">Bank of Maharastra</span>
+        <span class="badge">Works on mobile + desktop</span>
+      </div>
+
+      <!-- Config (edit these 3) -->
+      <div class="grid">
+        <div class="box">
+          <div class="row">
+            <div style="flex:1; min-width:240px">
+              <div class="k">Your UPI ID</div>
+              <input id="upiId" type="text" value="8010549112-icf8@ybl">
+            </div>
+            <div style="flex:1; min-width:200px">
+              <div class="k">Payee Name (shows to payer)</div>
+              <input id="payeeName" type="text" value="Mr. Shyam Raosaheb Desale">
+            </div>
+            <div style="width:160px">
+              <div class="k">Amount (INR)</div>
+              <input id="amount" type="number" min="149" max="149" value="149">
+            </div>
+          </div>
+          <div class="row">
+            <span class="pill">Note: Premium Access</span>
+            <button class="btn" id="applyCfg">Apply</button>
+          </div>
+        </div>
+
+        <div class="payarea">
+          <button class="cta" id="getPremiumBtn">
+            <span>💳 Get Premium</span>
+          </button>
+          <div class="hint">Desktop? We’ll show a QR. Mobile? We’ll open your UPI app.</div>
+
+          <div class="box">
+            <div class="k">Payment Options</div>
+            <div class="row">
+              <button class="btn ok" id="openUpi">Open UPI App (mobile)</button>
+              <button class="btn" id="showQr">Show QR (desktop)</button>
+              <button class="btn warn" id="demoPay">Demo Payment (no real charge)</button>
+            </div>
+            <div class="sep"></div>
+            <div class="qr" id="qrWrap" style="display:none">
+              <img id="qrImg" alt="UPI QR">
+              <div class="muted" id="qrNote"></div>
+            </div>
+          </div>
+
+          <div class="disclaimer">This page supports real UPI via intent/QR and also a demo success flow for hackathons.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success modal -->
+  <div class="success" id="success">
+    <div class="panel fade">
+      <div class="tick">✅</div>
+      <h2 style="margin:8px 0 6px">Payment Successful</h2>
+      <p class="muted" id="paidMeta">Premium activated. Payment ID: <b>pay_DEMO12345</b></p>
+      <div class="row" style="justify-content:center; margin-top:14px">
+        <button class="btn ok" onclick="document.getElementById('success').style.display='none'">Continue</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" style="display:none"><span id="toastMsg"></span></div>
+
+<script>
+(function(){
+  // ====== Config (you can change at runtime via inputs) ======
+  let UPI_ID = "8010549112-icf8@ybl";
+  let PAYEE_NAME = "Mr. Shyam Raosaheb Desale";
+  let AMOUNT_INR = 149;
+  const NOTE = "Premium Access";
+  const CURRENCY = "INR";
+
+  // ====== Helpers ======
+  const isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent || "");
+  const $ = (id)=>document.getElementById(id);
+  const toast = (msg)=>{
+    const t = $("toast"), m=$("toastMsg");
+    m.textContent = msg; t.style.display="grid"; setTimeout(()=>t.style.display="none", 2200);
+  };
+
+  const buildUpiLink = ()=>{
+    const params = new URLSearchParams({
+      pa: UPI_ID,
+      pn: PAYEE_NAME,
+      tn: NOTE,
+      am: String(AMOUNT_INR),
+      cu: CURRENCY
+    });
+    return `upi://pay?${params.toString()}`;
+  };
+
+  const buildQrUrl = (upiLink)=>{
+    // Uses a free QR generator service. Works great for demos.
+    return `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(upiLink)}`;
+  };
+
+  const openUpi = ()=>{
+    const link = buildUpiLink();
+    // On mobile: open the UPI app. On desktop: we'll just expose the link.
+    if (isMobile){
+      window.location.href = link;
+    } else {
+      $("upiLinkA").href = link;
+      $("qrWrap").style.display = "grid";
+      $("qrNote").textContent = "You’re on desktop. Either scan the QR below from your phone or copy/open the UPI link.";
+      $("qrImg").src = buildQrUrl(link);
+      toast("Desktop detected – showing QR/link.");
+    }
+  };
+
+  const showQr = ()=>{
+    const link = buildUpiLink();
+    $("qrWrap").style.display = "grid";
+    $("qrImg").src = buildQrUrl(link);
+    $("upiLinkA").href = link;
+    $("qrNote").textContent = "Scan with PhonePe / GPay / Paytm to pay.";
+  };
+
+  const demoPayment = async ()=>{
+    toast("Redirecting to payment… (demo)");
+    // Simulate processing
+    await new Promise(r=>setTimeout(r, 1200));
+    // Fake a payment id (in Razorpay real flow this comes from SDK)
+    const fakeId = "pay_DEMO" + Math.floor(10000 + Math.random()*89999);
+    $("paidMeta").innerHTML = `Premium activated. Payment ID: <b>${fakeId}</b>`;
+    $("success").style.display = "grid";
+  };
+
+  // ====== UI bindings ======
+  $("applyCfg").onclick = ()=>{
+    const id = $("upiId").value.trim();
+    const nm = $("payeeName").value.trim();
+    const amt = parseInt($("amount").value, 10);
+    if (!id || !nm || !amt || amt <= 0){
+      toast("Fill UPI ID, Name, Amount properly.");
+      return;
+    }
+    UPI_ID = id; PAYEE_NAME = nm; AMOUNT_INR = amt;
+    toast("Updated payment details ✅");
+    // refresh QR if visible
+    if ($("qrWrap").style.display !== "none"){
+      showQr();
+    }
+  };
+
+  $("getPremiumBtn").onclick = ()=>{
+    // Smart default: mobile opens app, desktop shows QR
+    if (isMobile) openUpi(); else showQr();
+  };
+  $("openUpi").onclick = openUpi;
+  $("showQr").onclick = showQr;
+  $("demoPay").onclick = demoPayment;
+
+  // If you want to pre-render QR on desktop:
+  if (!isMobile){
+    showQr();
+  }
+})();
+</script>
+</body>
+</html>

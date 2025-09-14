@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeRush ChatBot</title>
+    <script src="https://js.puter.com/v2/"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet">
+
+<body>
+    <!-- Auth Page -->
+    <div id="authPage" class="page-container hidden">
+        <div class="auth-background"></div>
+        <div class="auth-wrapper">
+            <main class="auth-container">
+                <div class="logo">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </div>
+
+                <header class="form-header">
+                    <h1 id="auth-title" class="auth-title">Welcome Back</h1>
+                    <p id="auth-subtitle" class="auth-subtitle">Enter the Nexus to continue your journey.</p>
+                </header>
+
+                <form id="auth-form" data-form-type="signin" onsubmit="handleAuth(event)">
+                    <div class="signup-field-wrapper">
+                        <div class="signup-field-inner">
+                            <div class="form-group">
+                                <input type="text" id="fullname" class="form-input" placeholder=" " autocomplete="name">
+                                <label for="fullname" class="form-label">Full Name</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" class="form-input" placeholder=" " autocomplete="email" required="">
+                        <label for="email" class="form-label">Email Address</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="password" class="form-input" placeholder=" " autocomplete="current-password" required="">
+                        <label for="password" class="form-label">Password</label>
+                    </div>
+                    <button type="submit" class="button button-primary main-submit-button">
+                        <span id="button-text" class="button-text">Sign In</span>
+                    </button>
+                </form>
+
+                <div class="toggle-text">
+                    <p id="toggle-text-content">
+                        Don't have an account? 
+                        <button id="form-toggle-button" class="toggle-button">Create one.</button>
+                    </p>
+                </div>
+
+                <footer class="auth-footer">
+                    <p>© 2025 Xai &amp; LVS Private Limited Corp. All rights reserved. Where elegance meets intelligence. This is the CodeRush.</p>
+                </footer>
+            </main>
+        </div>
+    </div>
+
+    <!-- Home Page -->
+    <div id="homePage" class="page-container active">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <img src="weblogo.png" alt="logo">
+            </div>
+            <div class="header-actions">
+                <button class="header-btn" onclick="toggleSidebar()" fdprocessedid="6mclfg">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <button class="header-btn" onclick="openSettings()" fdprocessedid="s5foqk">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+                <button id="payBtn" onclick="window.location.href='onlinepayment.html';">Get Premium</button>
+
+                <button class="header-btn primary" onclick="window.open('https://v0-no-content-theta-three.vercel.app/dashboard', '_blank')">
+                   <i class="fas fa-sign-out-alt"></i> Dashboard
+                </button>
+                <button class="header-btn primary"  fdprocessedid="j5b44" onclick="window.location.href='WebPage1.html';">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <button class="new-chat-btn" onclick="newChat()" fdprocessedid="5k2ev">
+                    <i class="fas fa-plus"></i>
+                    <span>New Chat</span>
+                </button>
+
+                <div class="chat-history">
+                    <div class="history-title">Today</div>
+                    <div class="history-item active">
+                        <div class="history-item-title">Welcome to CodeRush</div>
+                        <div class="history-item-preview">Where elegance meets intelligence</div>
+                    </div>
+                </div>
+
+                <div class="model-sections">
+
+                    <div class="model-section">
+                        <div class="section-header" onclick="toggleSection('chat-models')">
+                            <div class="section-title">💬 Chat Models</div>
+                            <div class="section-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="section-content active" id="chat-models">
+                            <div class="model-grid">
+                                <div class="model-option selected" data-model="gpt-4.1-nano" onclick="selectModel('gpt-4.1-nano')">
+                                    <div class="model-name">📑 Notes → Summary</div>
+                                    <div class="model-description">Get instant smart summaries</div>
+                                </div>
+                                <div class="model-option" data-model="gpt-4o" onclick="selectModel('gpt-4o')">
+                                    <div class="model-name">🎯 Quiz Generator</div>
+                                    <div class="model-description">Auto-generate quizzes to test your knowledge</div>
+                                </div>
+                                <div class="model-option" data-model="claude-sonnet-4" onclick="selectModel('claude-sonnet-4')">
+                                    <div class="model-name">💬 Ask Tutor</div>
+                                    <div class="model-description">Ask Tutor: Type your doubt → get instant answers 💡</div>
+                                </div>
+                                <div class="model-option" data-model="google/gemini-2.0-flash-lite-001" onclick="selectModel('google/gemini-2.0-flash-lite-001')">
+                                    <div class="model-name">Ai-Gemini 2.0 Flash</div>
+                                    <div class="model-description">Google's fastest model</div>
+                                </div>
+                                
+                                <div class="model-option" data-model="deepseek-chat" onclick="selectModel('deepseek-chat')">
+                                    <div class="model-name">Ai-DeepSeek V3</div>
+                                    <div class="model-description">Reasoning specialist</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="model-section">
+                        <div class="section-header" onclick="toggleSection('tts-models')">
+                            <div class="section-title">🔊 Text-to-Speech</div>
+                            <div class="section-icon">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="section-content" id="tts-models">
+                            <div class="model-grid">
+                                <div class="model-option" data-tts="standard" onclick="selectTTS('standard')">
+                                    <div class="model-name">Standard TTS</div>
+                                    <div class="model-description">High-quality standard voices</div>
+                                </div>
+                                <div class="model-option selected" data-tts="generative" onclick="selectTTS('generative')">
+                                    <div class="model-name">Generative TTS</div>
+                                    <div class="model-description">AI-generated human-like speech</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        </div>
+                        <div class="section-content" id="vision-models">
+                            <div class="model-grid">
+                                <div class="model-option selected" data-vision="gpt-4o-vision" onclick="selectVision('gpt-4o-vision')">
+                                    <div class="model-name">GPT-4o Vision</div>
+                                    <div class="model-description">Advanced image understanding</div>
+                                </div>
+                                <div class="model-option" data-vision="claude-vision" onclick="selectVision('claude-vision')">
+                                    <div class="model-name">Claude Vision</div>
+                                    <div class="model-description">Detailed image analysis</div>
+                                </div>
+                                <div class="model-option" data-vision="gemini-vision" onclick="selectVision('gemini-vision')">
+                                    <div class="model-name">Gemini Vision</div>
+                                    <div class="model-description">Google's vision model</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div class="chat-container">
+                <div class="messages-area" id="messagesArea">
+                    <div class="message message-assistant">
+                        <div class="message-avatar"><img src="logowala.png" alt="logo"></div>
+                        <div class="message-content">
+                            <div class="message-bubble">
+                                <p><strong>Welcome to CodeRush v1.0! 📑</strong></p>
+                                <p><em>Your smart study buddy! 🚀 From turning notes into quick summaries 📑</em></p>
+                                <p>Making fun quizzes 🎯, To solving your toughest doubts 💬 — I’ve got your back. Let’s learn smarter, together..!</p>
+                            </div>
+                            <div class="message-actions">
+                                <button class="action-btn" onclick="copyMessage(this)" fdprocessedid="bv65yk">
+                                    <i class="fas fa-copy"></i> Copy
+                                </button>
+                                <button class="action-btn" onclick="speakMessage(this)" fdprocessedid="81gui7">
+                                    <i class="fas fa-volume-up"></i> Speak
+                                </button>
+                                <button class="action-btn" onclick="shareMessage(this)" fdprocessedid="rotl9e">
+                                    <i class="fas fa-share"></i> Share
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-container">
+                    <div class="input-wrapper">
+                        <div class="input-top-bar">
+                            <div class="model-indicator" id="modelIndicator">📑 Notes → Summary</div>
+                            <div class="feature-toggles">
+                                <button class="toggle-btn active" id="streamToggle" onclick="toggleStreaming()" fdprocessedid="lsg8m9">Stream</button>
+                                <button class="toggle-btn" id="ttsToggle" onclick="toggleAutoTTS()" fdprocessedid="q1dvy5">Auto TTS</button>
+                            </div>
+                        </div>
+                        <div class="input-main">
+                            <textarea class="text-input" id="messageInput" placeholder="Message CodeRush..." rows="1" onkeydown="handleKeyDown(event)" oninput="autoResizeInput()" style="height: 24px;"></textarea>
+                            <div class="input-actions">
+                                <input type="file" class="file-input" id="imageInput" accept="image/*" onchange="handleImageUpload(this)">
+                                <button class="attachment-btn" onclick="document.getElementById('imageInput').click()" fdprocessedid="xat1sa">
+                                    <i class="fas fa-camera"></i>
+                                </button>
+                                <input type="file" class="file-input" id="fileInput" accept=".txt,.pdf,.doc,.docx" onchange="handleFileUpload(this)">
+                                <button class="attachment-btn" onclick="document.getElementById('fileInput').click()" fdprocessedid="en60xpn">
+                                    <i class="fas fa-paperclip"></i>
+                                </button>
+                                <button class="attachment-btn" onclick="generateImage()" fdprocessedid="5z92lb">
+                                    <i class="fas fa-palette"></i>
+                                </button>
+                            </div>
+                            <button class="send-btn" id="sendBtn" onclick="sendMessage()" fdprocessedid="u8xtoq">
+                                <i class="fas fa-arrow-up"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="modal-overlay" id="settingsModal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h2 class="modal-title">Settings</h2>
+                    <button class="modal-close" onclick="closeModal('settingsModal')">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div style="margin-bottom: 24px;">
+                        <h3 style="margin-bottom: 12px; color: var(--color-text-primary);">Voice Settings</h3>
+                        <select id="voiceLanguage" style="width: 100%; padding: 12px; background: var(--card-bg); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text-primary); margin-bottom: 12px;">
+                            <option value="en-US">English (US)</option>
+                            <option value="en-GB">English (UK)</option>
+                            <option value="fr-FR">Hindi</option>
+                            <option value="de-DE">Marathi</option>
+                            <option value="es-ES">Spanish</option>
+                            <option value="it-IT">Italian</option>
+                            <option value="ja-JP">Japanese</option>
+                        </select>
+                        <select id="voiceEngine" style="width: 100%; padding: 12px; background: var(--card-bg); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text-primary);">
+                            <option value="standard">Standard</option>
+                            <option value="generative">Generative</option>
+                        </select>
+                    </div>
+
+                    <div style="margin-bottom: 24px;">
+                        <h3 style="margin-bottom: 12px; color: var(--color-text-primary);">Preferences</h3>
+                        <label style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; cursor: pointer;">
+                            <input type="checkbox" id="autoTTSEnabled" style="accent-color: var(--accent-color);">
+                            <span style="color: var(--color-text-primary);">Auto Text-to-Speech</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px; cursor: pointer;">
+                            <input type="checkbox" id="streamingEnabled" checked="" style="accent-color: var(--accent-color);">
+                            <span style="color: var(--color-text-primary);">Streaming Responses</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer;">
+                            <input type="checkbox" id="saveHistory" checked="" style="accent-color: var(--accent-color);">
+                            <span style="color: var(--color-text-primary);">Save Chat History</span>
+                        </label>
+                    </div>
+
+                    <div>
+                        <h3 style="margin-bottom: 12px; color: var(--color-text-primary);">API Configuration</h3>
+
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 8px; color: var(--color-text-primary); font-weight: 500;">CodeRush Flash API Key</label>
+                            <div style="display: flex; gap: 8px;">
+                                <input type="password" id="geminiApiKey" placeholder="Enter your Gemini API key" style="flex: 1; padding: 12px; background: var(--input-bg); border: 1px solid var(--color-border); border-radius: 8px; color: var(--color-text-primary);">
+                                <button onclick="testGeminiConnection()" style="padding: 12px 16px; background: var(--accent-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Test</button>
+                                <button onclick="saveGeminiApiKey()" style="padding: 12px 16px; background: var(--success-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Save</button>
+                            </div>
+                            <small style="color: var(--color-text-secondary); margin-top: 4px; display: block;">Get your API key from <a href="https://makersuite.google.com/app/apikey" target="_blank" style="color: var(--accent-color);">Google AI Studio</a></small>
+                        </div>
+                        
+                        <h3 style="margin-bottom: 12px; color: var(--color-text-primary);">API Status</h3>
+                        <div style="background: var(--input-bg); padding: 16px; border-radius: 8px; border: 1px solid var(--color-border);">
+                            <div id="geminiApiStatus" style="margin-bottom: 8px; padding: 8px; background: rgba(239, 68, 68, 0.1); border-radius: 6px; font-size: 12px; color: var(--error-color);">
+                                <i class="fas fa-times"></i> Gemini Flash API Not Configured
+                            </div>
+                            <div style="margin-bottom: 8px; padding: 8px; background: rgba(16, 163, 127, 0.1); border-radius: 6px; font-size: 12px; color: var(--success-color);">
+                                <i class="fas fa-check"></i> Claude API Configured
+                            </div>
+                            <div style="margin-bottom: 8px; padding: 8px; background: rgba(16, 163, 127, 0.1); border-radius: 6px; font-size: 12px; color: var(--success-color);">
+                                <i class="fas fa-check"></i> DALL-E 3 API Ready
+                            </div>
+                            <div style="padding: 8px; background: rgba(16, 163, 127, 0.1); border-radius: 6px; font-size: 12px; color: var(--success-color);">
+                                <i class="fas fa-check"></i> Puter.ai Connected
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar" id="statusBar">
+            <div class="status-text" id="statusText">CodeRush v1.0 Ready</div>
+        </div>
+    </div>
+
+        <style>
+        :root {
+            --color-background: #0A0C10;
+            --color-surface: #12151C;
+            --color-surface-accent: #1A1D25;
+            --color-primary-hue: 265;
+            --color-secondary-hue: 195;
+            --color-primary: hsl(var(--color-primary-hue), 80%, 60%);
+            --color-secondary: hsl(var(--color-secondary-hue), 100%, 50%);
+            --color-text-primary: #F0F2F5;
+            --color-text-secondary: #9DA3AE;
+            --color-border: rgba(255, 255, 255, 0.1);
+            --font-primary: 'Inter', sans-serif;
+            --font-monospace: 'Space Mono', monospace;
+            --border-radius-md: 8px;
+            --border-radius-lg: 16px;
+            --transition-speed-fast: 0.2s;
+            --transition-speed-med: 0.4s;
+            --primary-bg: #0c0c0c;
+            --secondary-bg: #171717;
+            --card-bg: #2d2d2d;
+            --input-bg: #404040;
+            --accent-color: #10a37f;
+            --accent-hover: #0d8268;
+            --success-color: #19c37d;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-theme='light'] {
+            --color-background: #F8F9FA;
+            --color-surface: #FFFFFF;
+            --color-surface-accent: #F1F3F5;
+            --color-primary: hsl(var(--color-primary-hue), 70%, 50%);
+            --color-secondary: hsl(var(--color-secondary-hue), 90%, 45%);
+            --color-text-primary: #18191A;
+            --color-text-secondary: #5C5F66;
+            --color-border: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .button {
+            font-weight: 500;
+            text-decoration: none;
+            border-radius: var(--border-radius-md);
+            transition: all var(--transition-speed-med) ease;
+            display: inline-block;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .button-primary {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+            background-size: 200%;
+            color: #fff;
+            border: none;
+            animation: background-pan 5s infinite ease-in-out;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 20px -5px hsla(var(--color-primary-hue), 80%, 60%, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes background-pan {
+            0% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+            100% {
+                background-position: 0% center;
+            }
+        }
+
+        @keyframes move-aurora-1 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) scale(1.5);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg) scale(1.5);
+            }
+        }
+
+        @keyframes move-aurora-2 {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(-360deg) scale(1.2);
+            }
+        }
+
+        .auth-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .auth-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background: var(--color-background);
+        }
+
+        .auth-background::before,
+        .auth-background::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150vw;
+            height: 150vw;
+            max-width: 1200px;
+            max-height: 1200px;
+            mix-blend-mode: screen;
+            filter: blur(80px);
+            opacity: 0.6;
+            border-radius: 50%;
+        }
+
+        [data-theme='light'] .auth-background::before,
+        [data-theme='light'] .auth-background::after {
+            opacity: 0.3;
+        }
+
+        .auth-background::before {
+            background: linear-gradient(45deg, hsl(var(--color-primary-hue), 80%, 60%), transparent, transparent);
+            animation: move-aurora-1 40s linear infinite;
+        }
+
+        .auth-background::after {
+            background: linear-gradient(-45deg, hsl(var(--color-secondary-hue), 100%, 50%), transparent, transparent);
+            animation: move-aurora-2 60s linear infinite;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 460px;
+            background: hsla(220, 24%, 12%, 0.6);
+            padding: 50px 45px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid var(--color-border);
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 1s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        [data-theme='light'] .auth-container {
+            background: hsla(0, 0%, 100%, 0.5);
+        }
+
+        .auth-container>* {
+            opacity: 0;
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .auth-container .logo {
+            animation-delay: 0.5s;
+        }
+
+        .auth-container .form-header {
+            animation-delay: 0.6s;
+        }
+
+        .auth-container #auth-form {
+            animation-delay: 0.7s;
+        }
+
+        .auth-container .toggle-text {
+            animation-delay: 0.8s;
+        }
+
+        .auth-container .auth-footer {
+            animation-delay: 0.9s;
+        }
+
+        .auth-container .logo {
+            display: inline-flex;
+            margin-bottom: 25px;
+            color: var(--color-primary);
+        }
+
+        .form-header {
+            margin-bottom: 40px;
+        }
+
+        .auth-title {
+            font-size: 2.3rem;
+            margin-bottom: 10px;
+            color: var(--color-text-primary);
+        }
+
+        .auth-subtitle {
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 20px 15px 10px 15px;
+            background-color: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+            color: var(--color-text-primary);
+            font-size: 1rem;
+            transition: all var(--transition-speed-fast) ease;
+        }
+
+        .form-label {
+            position: absolute;
+            left: 15px;
+            top: 16px;
+            color: var(--color-text-secondary);
+            pointer-events: none;
+            transition: all 0.2s ease;
+            background-color: var(--color-surface);
+            padding: 0 5px;
+        }
+
+        [data-theme='light'] .form-label {
+            background-color: hsla(0, 0%, 100%, 0.5);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        .form-input:focus~.form-label,
+        .form-input:not(:placeholder-shown)~.form-label {
+            top: -9px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: var(--color-primary);
+            background: var(--color-surface);
+        }
+
+        [data-theme='light'] .form-input:focus~.form-label,
+        [data-theme='light'] .form-input:not(:placeholder-shown)~.form-label {
+            background: hsla(0, 0%, 100%, 0.5);
+        }
+
+        .signup-field-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            overflow: hidden;
+            transition: grid-template-rows var(--transition-speed-med) cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-form-type="signup"] .signup-field-wrapper {
+            grid-template-rows: 1fr;
+        }
+
+        .signup-field-inner {
+            min-height: 0;
+        }
+
+        .main-submit-button {
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 10px;
+        }
+
+        .button-text {
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        .button-text.fading {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .toggle-text {
+            margin-top: 30px;
+            color: var(--color-text-secondary);
+        }
+
+        .toggle-button {
+            background: none;
+            border: none;
+            padding: 0;
+            margin-left: 5px;
+            color: var(--color-primary);
+            font-weight: 500;
+            font-family: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .auth-footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        /* Home Page Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: rgba(23, 23, 23, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 15rem;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .header-btn {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 14px;
+        }
+
+        .header-btn:hover {
+            background: var(--card-bg);
+            color: var(--color-text-primary);
+            border-color: var(--accent-color);
+        }
+
+        .header-btn.primary {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .header-btn.primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 60px;
+            width: 280px;
+            height: calc(100vh - 60px);
+            background: var(--secondary-bg);
+            border-right: 1px solid var(--color-border);
+            overflow-y: auto;
+            z-index: 500;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-content {
+            padding: 20px;
+        }
+
+        .new-chat-btn {
+            width: 100%;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-primary);
+            padding: 12px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .new-chat-btn:hover {
+            background: var(--card-bg);
+            border-color: var(--accent-color);
+        }
+
+        .chat-history {
+            margin-bottom: 24px;
+        }
+
+        .history-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .history-item {
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .history-item:hover {
+            background: var(--card-bg);
+            border-color: var(--color-border);
+        }
+
+        .history-item.active {
+            background: var(--card-bg);
+            border-color: var(--accent-color);
+        }
+
+        .history-item-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .history-item-preview {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .model-sections {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .model-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--color-border);
+            overflow: hidden;
+        }
+
+        .section-header {
+            padding: 16px 20px;
+            background: var(--input-bg);
+            border-bottom: 1px solid var(--color-border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+        }
+
+        .section-header:hover {
+            background: var(--card-bg);
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .section-icon {
+            color: var(--color-text-secondary);
+            transition: transform 0.2s ease;
+        }
+
+        .section-content {
+            padding: 16px 20px;
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        .model-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+
+        .model-option {
+            padding: 12px 16px;
+            background: transparent;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .model-option:hover {
+            background: var(--input-bg);
+            border-color: var(--accent-color);
+        }
+
+        .model-option.selected {
+            background: rgba(16, 163, 127, 0.1);
+            border-color: var(--accent-color);
+        }
+
+        .model-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-primary);
+            margin-bottom: 4px;
+        }
+
+        .model-description {
+            font-size: 11px;
+            color: var(--color-text-secondary);
+        }
+
+        .main-content {
+            margin-left: 280px;
+            margin-top: 60px;
+            height: calc(100vh - 60px);
+            display: flex;
+            flex-direction: column;
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-content.expanded {
+            margin-left: 0;
+        }
+
+        .chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 24px;
+        }
+
+        .messages-area {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 0;
+            scroll-behavior: smooth;
+        }
+
+        .message {
+            margin-bottom: 32px;
+            animation: messageSlideIn 0.4s ease-out;
+        }
+
+        .message-user {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .message-assistant {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        .message-content {
+            max-width: 70%;
+            position: relative;
+        }
+
+        .message-bubble {
+            padding: 16px 20px;
+            border-radius: 18px;
+            position: relative;
+            word-wrap: break-word;
+            line-height: 1.5;
+        }
+
+        .message-user .message-bubble {
+            background: var(--accent-color);
+            color: white;
+            border-bottom-right-radius: 6px;
+        }
+
+        .message-assistant .message-bubble {
+            background: var(--card-bg);
+            color: var(--color-text-primary);
+            border: 1px solid var(--color-border);
+            border-bottom-left-radius: 6px;
+        }
+
+        .message-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 12px;
+            flex-shrink: 0;
+        }
+
+        .message-user .message-avatar {
+            background: var(--accent-color);
+            color: white;
+            order: 2;
+        }
+
+        .message-assistant .message-avatar {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .message-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+
+        .message:hover .message-actions {
+            opacity: 1;
+        }
+
+        .action-btn {
+            background: var(--input-bg);
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: var(--card-bg);
+            color: var(--color-text-primary);
+            border-color: var(--accent-color);
+        }
+
+        .input-area {
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--color-border);
+            padding: 24px;
+        }
+
+        .input-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .input-wrapper {
+            background: var(--card-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 24px;
+            transition: all 0.2s ease;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .input-wrapper:focus-within {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 4px rgba(16, 163, 127, 0.1);
+        }
+
+        .input-top-bar {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            background: var(--input-bg);
+            border-bottom: 1px solid var(--color-border);
+            gap: 12px;
+        }
+
+        .model-indicator {
+            background: rgba(16, 163, 127, 0.1);
+            color: var(--accent-color);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 500;
+        }
+
+        .feature-toggles {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: 1px solid var(--color-border);
+            color: var(--color-text-secondary);
+            padding: 4px 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 11px;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        .input-main {
+            display: flex;
+            align-items: end;
+            padding: 16px 20px;
+            gap: 16px;
+        }
+
+        .text-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--color-text-primary);
+            font-size: 16px;
+            resize: none;
+            outline: none;
+            min-height: 24px;
+            max-height: 200px;
+            line-height: 1.5;
+        }
+
+        .text-input::placeholder {
+            color: var(--color-text-secondary);
+        }
+
+        .input-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .attachment-btn {
+            background: transparent;
+            border: none;
+            color: var(--color-text-secondary);
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .attachment-btn:hover {
+            background: var(--input-bg);
+            color: var(--color-text-primary);
+        }
+
+        .send-btn {
+            background: var(--accent-color);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .send-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.05);
+        }
+
+        .send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            animation: messageSlideIn 0.4s ease-out;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            animation: typingPulse 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: var(--secondary-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 16px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            padding: 24px 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--color-text-primary);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: var(--color-text-secondary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: var(--card-bg);
+            color: var(--color-text-primary);
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--card-bg);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 12px 16px;
+            z-index: 1500;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .status-bar.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .status-text {
+            font-size: 14px;
+            color: var(--color-text-primary);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .generated-image {
+            max-width: 100%;
+            border-radius: 12px;
+            margin: 12px 0;
+            border: 1px solid var(--color-border);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .page-container {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .page-container.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes messageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes typingPulse {
+            0%,
+            60%,
+            100% {
+                opacity: 0.3;
+                transform: scale(0.8);
+            }
+            30% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--secondary-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-border);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .chat-container {
+                padding: 16px;
+            }
+
+            .input-area {
+                padding: 16px;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .auth-container {
+                padding: 40px 25px;
+            }
+        }
+    </style>
+</head>
+
+    
+    <script>
+        let currentModel = 'gpt-4.1-nano';
+        let currentTTS = 'generative';
+        let currentGenerative = 'dall-e-3';
+        let currentVision = 'gpt-4o-vision';
+        let streamingEnabled = true;
+        let autoTTSEnabled = false;
+        let conversationHistory = [];
+        let isGeneratingResponse = false;
+        let currentUser = null;
+        let geminiApiKey = '';
+
+        function handleAuth(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const fullname = document.getElementById('fullname').value;
+            const isSignup = document.getElementById('auth-form').dataset.formType === 'signup';
+            
+            if (isSignup && !fullname) {
+                showStatus('Please enter your full name', 3000);
+                return;
+            }
+            
+            if (!email || !password) {
+                showStatus('Please fill in all required fields', 3000);
+                return;
+            }
+            
+            if (password.length < 6) {
+                showStatus('Password must be at least 6 characters', 3000);
+                return;
+            }
+            
+            const userData = {
+                email: email,
+                name: isSignup ? fullname : email.split('@')[0],
+                joinDate: new Date().toISOString(),
+                isSignup: isSignup
+            };
+            
+            localStorage.setItem('nova-zenith-user', JSON.stringify(userData));
+            currentUser = userData;
+            
+            showStatus(isSignup ? 'Account created successfully!' : 'Welcome back!', 2000);
+            
+            setTimeout(() => {
+                switchToHomePage();
+            }, 1000);
+        }
+
+        function switchToHomePage() {
+            const authPage = document.getElementById('authPage');
+            const homePage = document.getElementById('homePage');
+            
+            authPage.classList.remove('active');
+            authPage.classList.add('hidden');
+            
+            homePage.classList.remove('hidden');
+            setTimeout(() => {
+                homePage.classList.add('active');
+                initializeApp();
+            }, 100);
+        }
+
+        function switchToAuthPage() {
+            const authPage = document.getElementById('authPage');
+            const homePage = document.getElementById('homePage');
+            
+            homePage.classList.remove('active');
+            homePage.classList.add('hidden');
+            
+            authPage.classList.remove('hidden');
+            setTimeout(() => {
+                authPage.classList.add('active');
+            }, 100);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const authForm = document.getElementById('auth-form');
+            const toggleTextContent = document.getElementById('toggle-text-content');
+            const authTitle = document.getElementById('auth-title');
+            const authSubtitle = document.getElementById('auth-subtitle');
+            const buttonText = document.getElementById('button-text');
+            const passwordInput = document.getElementById('password');
+
+            function attachToggleListener() {
+                const toggleButton = document.getElementById('form-toggle-button');
+                if (toggleButton) {
+                    toggleButton.addEventListener('click', toggleForm);
+                }
+            }
+
+            function toggleForm(e) {
+                if (e) e.preventDefault();
+                
+                const isSigningUp = authForm.dataset.formType === 'signin';
+                const FADE_TIME = 200;
+                
+                authForm.dataset.formType = isSigningUp ? 'signup' : 'signin';
+
+                buttonText.classList.add('fading');
+                setTimeout(() => {
+                    buttonText.textContent = isSigningUp ? 'Create Account' : 'Sign In';
+                    buttonText.classList.remove('fading');
+                }, FADE_TIME);
+                
+                if (isSigningUp) {
+                    authTitle.textContent = 'Join the CodeRush Initiative';
+                    authSubtitle.textContent = 'Create your account to begin the journey.';
+                    toggleTextContent.innerHTML = 'Already have an account? <button id="form-toggle-button" class="toggle-button">Sign in instead.</button>';
+                    passwordInput.setAttribute('autocomplete', 'new-password');
+                } else {
+                    authTitle.textContent = 'Welcome Back';
+                    authSubtitle.textContent = 'Enter the Nexus to continue your journey.';
+                    toggleTextContent.innerHTML = 'Don\'t have an account? <button id="form-toggle-button" class="toggle-button">Create one.</button>';
+                    passwordInput.setAttribute('autocomplete', 'current-password');
+                }
+                
+                attachToggleListener();
+            }
+
+            attachToggleListener();
+
+            const userData = localStorage.getItem('nova-zenith-user');
+            if (userData) {
+                currentUser = JSON.parse(userData);
+                switchToHomePage();
+            }
+        });
+
+        function initializeApp() {
+            autoResizeInput();
+            loadSettings();
+            loadGeminiApiKey();
+            document.getElementById('messageInput').focus();
+            showStatus('CodeRush v1.0 Ready', 2000);
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            sidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('expanded');
+        }
+
+        function toggleSection(sectionId) {
+            const content = document.getElementById(sectionId);
+            const icon = content.previousElementSibling.querySelector('.section-icon i');
+            
+            content.classList.toggle('active');
+            icon.classList.toggle('fa-chevron-down');
+            icon.classList.toggle('fa-chevron-up');
+        }
+
+        function logout() {
+            localStorage.removeItem('nova-zenith-user');
+            currentUser = null;
+            conversationHistory = [];
+            switchToAuthPage();
+        }
+
+        function selectModel(model) {
+            currentModel = model;
+            
+            document.querySelectorAll('#chat-models .model-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`[data-model="${model}"]`).classList.add('selected');
+            
+            const modelNames = {
+                'gpt-4.1-nano': '📑 Notes → Summary',
+                'gpt-4o': '🎯 Quiz Generator',
+                'claude-sonnet-4': '💬 Ask Tutor',
+                'google/gemini-2.0-flash-lite-001': 'Gemini 2.0 Flash',
+                'google/gemini-2.5-pro-exp-03-25:free': 'Gemini 2.5 Pro',
+                'deepseek-chat': 'DeepSeek V3',
+                'meta-llama/llama-4-maverick': 'Llama 4 Maverick',
+                'x-ai/grok-3-beta': 'Grok 3 Beta',
+                'mistral-large-latest': 'Mistral Large'
+            };
+            
+            document.getElementById('modelIndicator').textContent = modelNames[model] || model;
+            showStatus(`Switched to ${modelNames[model] || model}`, 2000);
+        }
+
+        function selectTTS(engine) {
+            currentTTS = engine;
+            document.querySelectorAll('#tts-models .model-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`[data-tts="${engine}"]`).classList.add('selected');
+            showStatus(`TTS engine: ${engine}`, 1500);
+        }
+
+        function selectGenerative(model) {
+            currentGenerative = model;
+            document.querySelectorAll('#generative-models .model-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`[data-gen="${model}"]`).classList.add('selected');
+            showStatus(`Generative model: ${model}`, 1500);
+        }
+
+        function selectVision(model) {
+            currentVision = model;
+            document.querySelectorAll('#vision-models .model-option').forEach(opt => opt.classList.remove('selected'));
+            document.querySelector(`[data-vision="${model}"]`).classList.add('selected');
+            showStatus(`Vision model: ${model}`, 1500);
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value.trim();
+            
+            if (!message) return;
+
+            if (!geminiApiKey) {
+                showStatus('Please configure your Gemini API key in settings first', 3000);
+                return;
+            }
+            
+            addUserMessage(message);
+            messageInput.value = '';
+            
+            showTypingIndicator();
+            
+            try {
+                let response;
+                
+                const responseText = await callGeminiAPI(message);
+                response = { message: { content: responseText } };
+                
+                hideTypingIndicator();
+                
+                const finalResponseText = response.message?.content || responseText;
+                addAssistantMessage(finalResponseText);
+                
+                conversationHistory.push({
+                    role: "assistant",
+                    content: finalResponseText
+                });
+                
+                if (autoTTSEnabled) {
+                    speakText(finalResponseText);
+                }
+                
+            } catch (error) {
+                hideTypingIndicator();
+                showStatus(`Error: ${error.message}`, 3000);
+                addAssistantMessage("Sorry, I encountered an error. Please check your API key and try again.");
+            }
+        }
+
+        async function handleStandardResponse(message) {
+            showTypingIndicator();
+            
+            try {
+                let response;
+                
+                if (currentModel === 'claude-sonnet-4') {
+                    response = await puter.ai.chat(message, {model: 'claude-sonnet-4'});
+                } else {
+                    response = await puter.ai.chat(message, { model: currentModel });
+                }
+                
+                hideTypingIndicator();
+                
+                const responseText = response.message?.content?.[0]?.text || response.message?.content || response;
+                addAssistantMessage(responseText);
+                
+                conversationHistory.push({
+                    role: "assistant",
+                    content: responseText
+                });
+                
+                if (autoTTSEnabled) {
+                    speakText(responseText);
+                }
+                
+            } catch (error) {
+                hideTypingIndicator();
+                throw error;
+            }
+        }
+
+        async function handleStreamingResponse(message) {
+            const messageElement = addAssistantMessage('', true);
+            const contentElement = messageElement.querySelector('.message-bubble');
+            
+            try {
+                let fullResponse = '';
+                
+                if (currentModel === 'claude-sonnet-4') {
+                    const response = await puter.ai.chat(message, {model: 'claude-sonnet-4'});
+                    fullResponse = response.message?.content?.[0]?.text || response.message?.content || response;
+                    contentElement.innerHTML = fullResponse.replace(/\n/g, '<br>');
+                } else {
+                    const stream = await puter.ai.chat(message, { 
+                        model: currentModel, 
+                        stream: true 
+                    });
+                    
+                    for await (const chunk of stream) {
+                        if (chunk?.text) {
+                            fullResponse += chunk.text;
+                            contentElement.innerHTML = fullResponse.replace(/\n/g, '<br>');
+                            scrollToBottom();
+                        }
+                    }
+                }
+                
+                conversationHistory.push({
+                    role: "assistant",
+                    content: fullResponse
+                });
+                
+                if (autoTTSEnabled) {
+                    speakText(fullResponse);
+                }
+                
+            } catch (error) {
+                contentElement.innerHTML = `Sorry, I encountered an error: ${error.message}`;
+                throw error;
+            }
+        }
+
+        function addUserMessage(content) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-user';
+            messageDiv.innerHTML = `
+                <div class="message-avatar"><img src="sandip.png"></div>
+                <div class="message-content">
+                    <div class="message-bubble">${content.replace(/\n/g, '<br>')}</div>
+                </div>
+            `;
+            messagesArea.appendChild(messageDiv);
+            scrollToBottom();
+        }
+
+        function addAssistantMessage(content, isStreaming = false) {
+            const messagesArea = document.getElementById('messagesArea');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message message-assistant';
+            messageDiv.innerHTML = `
+                <div class="message-avatar"><img src="logowala.png"/></div>
+                <div class="message-content">
+                    <div class="message-bubble">${content.replace(/\n/g, '<br>')}</div>
+                    <div class="message-actions">
+                        <button class="action-btn" onclick="copyMessage(this)"><i class="fas fa-copy"></i> Copy</button>
+                        <button class="action-btn" onclick="speakMessage(this)"><i class="fas fa-volume-up"></i> Speak</button>
+                        <button class="action-btn" onclick="shareMessage(this)"><i class="fas fa-share"></i> Share</button>
+                        <button class="action-btn" onclick="downloadMessage(this)"><i class="fas fa-download"></i> Save</button>
+                    </div>
+                </div>
+            `;
+            messagesArea.appendChild(messageDiv);
+            scrollToBottom();
+            return messageDiv;
+        }
+
+        function showTypingIndicator() {
+            const messagesArea = document.getElementById('messagesArea');
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            typingDiv.innerHTML = `
+                <div class="message-avatar"><img src="logowala.png"/></div>
+                <div style="color: var(--color-text-secondary); font-size: 14px;">
+                    CodeRush is thinking
+                    <div class="typing-dots">
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    </div>
+                </div>
+            `;
+            messagesArea.appendChild(typingDiv);
+            scrollToBottom();
+        }
+
+        function hideTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) {
+                indicator.remove();
+            }
+        }
+
+        function scrollToBottom() {
+            const messagesArea = document.getElementById('messagesArea');
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        function handleKeyDown(event) {
+            if (event.key === 'Enter' && !event.shiftKey) {
+                event.preventDefault();
+                sendMessage();
+            }
+        }
+
+        function autoResizeInput() {
+            const input = document.getElementById('messageInput');
+            input.style.height = 'auto';
+            input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+        }
+
+        function copyMessage(button) {
+            const messageText = button.closest('.message-content').querySelector('.message-bubble').textContent;
+            navigator.clipboard.writeText(messageText);
+            showStatus('Message copied', 1500);
+        }
+
+        async function speakMessage(button) {
+            const messageText = button.closest('.message-content').querySelector('.message-bubble').textContent;
+            await speakText(messageText);
+        }
+
+        function shareMessage(button) {
+            const messageText = button.closest('.message-content').querySelector('.message-bubble').textContent;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'CodeRush Response',
+                    text: messageText
+                });
+            } else {
+                navigator.clipboard.writeText(messageText);
+                showStatus('Message copied for sharing', 2000);
+            }
+        }
+
+        function downloadMessage(button) {
+            const messageText = button.closest('.message-content').querySelector('.message-bubble').textContent;
+            const blob = new Blob([messageText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `nova-zenith-message-${Date.now()}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showStatus('Message saved', 1500);
+        }
+
+
+
+        async function handleImageUpload(input) {
+            showStatus('Image analysis requires puter.ai integration (disabled)', 3000);
+        }
+
+        async function handleFileUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            addUserMessage(`<i class="fas fa-paperclip"></i> Uploaded file: ${file.name}`);
+            showStatus('File uploaded (analysis disabled)', 1500);
+        }
+
+        async function generateImage() {
+            showStatus('Image generation requires puter.ai integration (disabled)', 3000);
+        }
+
+        function downloadImage(button) {
+            const img = button.previousElementSibling;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            ctx.drawImage(img, 0, 0);
+            
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `nova-zenith-generated-${Date.now()}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+                showStatus('Image downloaded', 1500);
+            });
+        }
+
+        function toggleStreaming() {
+            streamingEnabled = !streamingEnabled;
+            const toggle = document.getElementById('streamToggle');
+            const checkbox = document.getElementById('streamingEnabled');
+            
+            toggle.classList.toggle('active', streamingEnabled);
+            if (checkbox) checkbox.checked = streamingEnabled;
+            
+            showStatus(`Streaming ${streamingEnabled ? 'enabled' : 'disabled'}`, 1500);
+        }
+
+        function toggleAutoTTS() {
+            autoTTSEnabled = !autoTTSEnabled;
+            const toggle = document.getElementById('ttsToggle');
+            const checkbox = document.getElementById('autoTTSEnabled');
+            
+            toggle.classList.toggle('active', autoTTSEnabled);
+            if (checkbox) checkbox.checked = autoTTSEnabled;
+            
+            showStatus(`Auto TTS ${autoTTSEnabled ? 'enabled' : 'disabled'}`, 1500);
+        }
+
+        function newChat() {
+            conversationHistory = [];
+            const messagesArea = document.getElementById('messagesArea');
+            messagesArea.innerHTML = `
+                <div class="message message-assistant">
+                    <div class="message-avatar"><img src="logowala.png"/></div>
+                    <div class="message-content">
+                        <div class="message-bubble">
+                            <p><strong>New conversation started! 🚀</strong></p>
+                            <p>How can I help you today?</p>
+                        </div>
+                        <div class="message-actions">
+                            <button class="action-btn" onclick="copyMessage(this)"><i class="fas fa-copy"></i> Copy</button>
+                            <button class="action-btn" onclick="speakMessage(this)"><i class="fas fa-volume-up"></i> Speak</button>
+                            <button class="action-btn" onclick="shareMessage(this)"><i class="fas fa-share"></i> Share</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showStatus('New chat started', 1500);
+        }
+
+        function openSettings() {
+            document.getElementById('settingsModal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        function loadSettings() {
+            const settings = localStorage.getItem('nova-zenith-settings');
+            if (settings) {
+                const parsed = JSON.parse(settings);
+                
+                const voiceLanguage = document.getElementById('voiceLanguage');
+                const voiceEngine = document.getElementById('voiceEngine');
+                const autoTTSEnabledCheck = document.getElementById('autoTTSEnabled');
+                const streamingEnabledCheck = document.getElementById('streamingEnabled');
+                const saveHistoryCheck = document.getElementById('saveHistory');
+                const geminiApiKeyInput = document.getElementById('geminiApiKey');
+                
+                if (voiceLanguage) voiceLanguage.value = parsed.voiceLanguage || 'en-US';
+                if (voiceEngine) voiceEngine.value = parsed.voiceEngine || 'generative';
+                if (autoTTSEnabledCheck) autoTTSEnabledCheck.checked = parsed.autoTTS || false;
+                if (streamingEnabledCheck) streamingEnabledCheck.checked = parsed.streaming !== false;
+                if (saveHistoryCheck) saveHistoryCheck.checked = parsed.saveHistory !== false;
+                
+                autoTTSEnabled = parsed.autoTTS || false;
+                streamingEnabled = parsed.streaming !== false;
+                
+                const ttsToggle = document.getElementById('ttsToggle');
+                const streamToggle = document.getElementById('streamToggle');
+                
+                if (ttsToggle) ttsToggle.classList.toggle('active', autoTTSEnabled);
+                if (streamToggle) streamToggle.classList.toggle('active', streamingEnabled);
+            }
+        }
+
+        function saveSettings() {
+            const voiceLanguage = document.getElementById('voiceLanguage');
+            const voiceEngine = document.getElementById('voiceEngine');
+            const autoTTSEnabledCheck = document.getElementById('autoTTSEnabled');
+            const streamingEnabledCheck = document.getElementById('streamingEnabled');
+            const saveHistoryCheck = document.getElementById('saveHistory');
+            
+            const settings = {
+                voiceLanguage: voiceLanguage?.value || 'en-US',
+                voiceEngine: voiceEngine?.value || 'generative',
+                autoTTS: autoTTSEnabledCheck?.checked || false,
+                streaming: streamingEnabledCheck?.checked !== false,
+                saveHistory: saveHistoryCheck?.checked !== false
+            };
+            
+            localStorage.setItem('nova-zenith-settings', JSON.stringify(settings));
+        }
+        async function speakText(text) {
+            if (!text) return;
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = "en-US"; // ya "hi-IN" agar Hindi chahiye
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function loadGeminiApiKey() {
+            const savedKey = localStorage.getItem('gemini-api-key');
+            if (savedKey) {
+                geminiApiKey = savedKey;
+                document.getElementById('geminiApiKey').value = savedKey;
+                updateGeminiApiStatus(true);
+            } else {
+                const defaultKey = 'AIzaSyBi8uUigQmQRJ80eoaAgifCroQb3uY6gIY';
+                geminiApiKey = defaultKey;
+                localStorage.setItem('gemini-api-key', defaultKey);
+                document.getElementById('geminiApiKey').value = defaultKey;
+                updateGeminiApiStatus(true);
+            }
+        }
+
+        function saveGeminiApiKey() {
+            const keyInput = document.getElementById('geminiApiKey');
+            const key = keyInput.value.trim();
+            
+            if (key) {
+                geminiApiKey = key;
+                localStorage.setItem('gemini-api-key', key);
+                updateGeminiApiStatus(true);
+                showStatus('Gemini API key saved successfully', 3000);
+            } else {
+                showStatus('Please enter a valid API key', 3000);
+            }
+        }
+
+        async function testGeminiConnection() {
+            const keyInput = document.getElementById('geminiApiKey');
+            const key = keyInput.value.trim();
+            
+            if (!key) {
+                showStatus('Please enter an API key first', 3000);
+                return;
+            }
+
+            showStatus('Testing Gemini connection...', 0);
+            
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: "Hello, this is a test message."
+                            }]
+                        }]
+                    })
+                });
+
+                if (response.ok) {
+                    geminiApiKey = key;
+                    updateGeminiApiStatus(true);
+                    showStatus('Gemini API connection successful!', 3000);
+                } else {
+                    updateGeminiApiStatus(false);
+                    showStatus('Gemini API connection failed. Check your API key.', 3000);
+                }
+            } catch (error) {
+                updateGeminiApiStatus(false);
+                showStatus('Connection test failed: ' + error.message, 3000);
+            }
+        }
+
+        function updateGeminiApiStatus(isConnected) {
+            const statusElement = document.getElementById('geminiApiStatus');
+            if (isConnected) {
+                statusElement.innerHTML = '<i class="fas fa-check"></i> CodeRush API Connected';
+                statusElement.style.background = 'rgba(16, 163, 127, 0.1)';
+                statusElement.style.color = 'var(--success-color)';
+            } else {
+                statusElement.innerHTML = '<i class="fas fa-times"></i> Gemini Flash API Not Configured';
+                statusElement.style.background = 'rgba(239, 68, 68, 0.1)';
+                statusElement.style.color = 'var(--error-color)';
+            }
+        }
+
+        async function callGeminiAPI(message) {
+            if (!geminiApiKey) {
+                throw new Error('Gemini API key not configured');
+            }
+
+            const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${geminiApiKey}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: message
+                        }]
+                    }],
+                    generationConfig: {
+                        temperature: 0.7,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 8192,
+                    }
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Gemini API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+        }
+
+        function showStatus(message, duration = 0) {
+            const statusBar = document.getElementById('statusBar');
+            const statusText = document.getElementById('statusText');
+            
+            if (statusBar && statusText) {
+                statusText.textContent = message;
+                statusBar.classList.add('active');
+                
+                if (duration > 0) {
+                    setTimeout(() => {
+                        statusBar.classList.remove('active');
+                    }, duration);
+                }
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSettings();
+            loadGeminiApiKey();
+            
+            const settingsInputs = document.querySelectorAll('#settingsModal input, #settingsModal select');
+            settingsInputs.forEach(input => {
+                input.addEventListener('change', saveSettings);
+            });
+        });
+
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal-overlay')) {
+                e.target.classList.remove('active');
+            }
+        });
+
+        document.addEventListener('change', function(e) {
+            if (e.target.closest('#settingsModal')) {
+                saveSettings();
+            }
+        });
+
+        setInterval(saveSettings, 30000);
+    </script>
+
+
+<span id="PING_IFRAME_FORM_DETECTION" style="display: none;"></span>
+</body>
+</html>
